@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okust - Endüstriyel Elektrikli Araçlar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --okust-blue: #424242;
+            --okust-orange: #E25204;
+        }
+
+        .navbar {
+            background-color: var(--okust-blue);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1030;
+        }
+
+        .navbar-brand img {
+            height: 150px;
+            margin-bottom: -40px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 1050;
+        }
+
+        .nav-link {
+            
+            color: white !important;
+            font-weight: 500;
+            padding: 10px 20px !important;
+        }
+
+    
+
+        .nav-link.active,
+        .nav-link:hover {
+            background-color: var(--okust-orange);
+            
+        }
+
+
+
+        .hero-section {
+            background-image: url(assets/bg-black.jpg);
+            background-size: cover;
+            background-position: center;
+            opacity: .9;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .product-card {
+            border: none;
+            transition: transform 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .btn-okust {
+            background-color: var(--okust-orange);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+        }
+
+        .btn-okust:hover {
+            background-color: #e65c00;
+            color: white;
+        }
+
+        .language-selector {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .language-selector select {
+            background-color: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .language-selector select option {
+            background-color: var(--okust-blue);
+            color: white;
+        }
+
+        @media (max-width: 991px) {
+            .language-selector {
+                right: 70px;
+                /* Mobil menü butonu ile çakışmaması için */
+            }
+        }
+
+        /* Mega menü stilleri güncelleniyor */
+        .mega-menu {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            top: 80px;
+            background-color: var(--okust-orange);
+            padding: 40px 0;
+            display: none;
+            z-index: 1040;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .mega-menu.show {
+            display: block;
+        }
+
+        .vehicle-card {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .vehicle-card:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .vehicle-card img {
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .vehicle-card:hover img {
+            transform: translateY(-10px);
+        }
+
+        .vehicle-card h3 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            color: white;
+        }
+
+        .vehicle-type {
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        /* Diğer mega menüler için stiller */
+        .mega-menu-content {
+            color: white;
+        }
+
+        .mega-menu-content h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .mega-menu-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .mega-menu-image {
+            max-width: 300px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Navbar container stilini ekliyoruz */
+        .navbar-container {
+            position: relative;
+            z-index: 1000;
+            background-color: #4a4a4a;
+        }
+
+        /* Language selector z-index güncelleme */
+        .language-selector {
+            z-index: 1001;
+        }
+
+        /* Teklif Al butonu için özel stil */
+        .nav-link.btn-okust {
+            background-color: var(--okust-orange);
+            margin-left: 15px;
+            border-radius: 5px;
+        }
+
+        .nav-link.btn-okust:hover {
+            background-color: #e65c00;
+        }
+
+        /* Responsive tasarım için yeni stiller */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background-color: var(--okust-blue);
+                padding: 15px;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+            }
+
+            .nav-link {
+                padding: 12px 20px !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+
+            .language-selector {
+                right: 70px;
+            }
+
+            /* Mobilde mega menüleri gizle */
+            .mega-menu {
+                display: none !important;
+            }
+
+            /* Mobilde teklif al butonunu düzenle */
+            .nav-link.btn-okust {
+                margin: 10px 20px;
+                text-align: center;
+            }
+
+            /* Hamburger menü ikonu stilini düzenle */
+            .navbar-toggler {
+                border-color: rgba(255, 255, 255, 0.5);
+                padding: 8px 12px;
+            }
+
+            .navbar-toggler:focus {
+                box-shadow: none;
+            }
+        }
+
+        /* Navbar brand (logo) responsive ayarı */
+        @media (max-width: 576px) {
+            .navbar-brand img {
+                height: 40px;
+                margin: 0;
+            }
+        }
+
+        /*adding*/
+        .first-container {
+            background-color: #EFE9E3;
+        }
+
+        .first-container h2{
+            color: var(--okust-orange);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .product-card{
+            background-color: #EFE9E3;
+        }
+
+        /* Kullanım Alanları Bölümü Stilleri */
+        .usage-area-section {
+            background-color: #f8f9fa;
+        }
+
+        .usage-area-section .container {
+            max-width: 100%;
+            padding: 0 30px;
+        }
+
+        .col-lg-8 {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+
+        .usage-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .usage-card .row {
+            margin: 0;
+            width: 100%;
+        }
+
+        .usage-card .col-md-6 {
+            padding: 0 30px;
+        }
+
+        .usage-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .usage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .usage-content {
+            padding: 30px 50px;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background-color: var(--okust-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .icon-box i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .usage-content h4 {
+            color: var(--okust-blue);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .usage-content ul li {
+            padding: 8px 0;
+            color: #666;
+            display: flex;
+            align-items: center;
+        }
+
+        .usage-content ul li i {
+            color: var(--okust-orange);
+            margin-right: 10px;
+        }
+
+        /* Responsive düzenlemeler */
+        @media (max-width: 768px) {
+            .usage-area-section .container {
+                padding: 0 15px;
+            }
+            
+            .usage-card {
+                padding: 20px;
+            }
+            
+            .usage-card .col-md-6 {
+                padding: 0 15px;
+            }
+            
+            .usage-image {
+                height: 250px;
+                margin-top: 20px;
+            }
+        }
+
+        /* Hakkımızda Bölümü Stilleri */
+        .about-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #EFE9E3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: var(--okust-orange);
+            opacity: 0.05;
+            border-radius: 50%;
+            transform: translate(150px, -150px);
+        }
+
+        .about-image {
+            position: relative;
+            padding: 20px;
+        }
+
+        .about-image img {
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image:hover img {
+            transform: translateY(-10px);
+        }
+
+        .about-content {
+            padding: 30px;
+        }
+
+        .brand-title {
+            color: var(--okust-blue);
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -1px;
+        }
+
+        .brand-subtitle {
+            display: block;
+            color: var(--okust-orange);
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .brand-description {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Responsive düzenlemeler */
+        @media (max-width: 991px) {
+            .about-content {
+                padding: 20px 0;
+                text-align: center;
+            }
+            
+            .brand-title {
+                font-size: 2.5rem;
+            }
+            
+            .brand-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .about-image {
+                margin-bottom: 30px;
+            }
+        }
+
+        /* Sayfanın geri kalanı için padding ekleyelim */
+        body {
+            padding-top: 60px;
+        }
+
+        /* Responsive düzenlemeler */
+        @media (max-width: 991px) {
+            body {
+                padding-top: 50px;
+            }
+            
+            .mega-menu {
+                top: 60px;
+            }
+        }
+
+        /* Footer stilini güncelle */
+        footer {
+            background-color: var(--okust-blue) !important; /* navbar ile aynı renk */
+            padding: 50px 0 30px !important;
+        }
+
+        /* Footer içindeki başlıkları daha belirgin yap */
+        footer h5 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Footer linklerinin hover efektini güncelle */
+        footer .text-white-50:hover {
+            color: var(--okust-orange) !important;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        /* Showcase Section Styles */
+        .showcase-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #EFE9E3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase-section .section-header h2 {
+            color: var(--okust-blue);
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .showcase-section .lead {
+            color: var(--okust-orange);
+            font-size: 1.25rem;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .showcase-slider {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .carousel-item {
+            height: 600px;
+        }
+
+        .carousel-item img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            bottom: 40px;
+        }
+
+        .carousel-caption h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .carousel-indicators {
+            bottom: 20px;
+        }
+
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 5px;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 50px;
+            height: 50px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 0 20px;
+        }
+
+        /* Responsive düzenlemeler */
+        @media (max-width: 768px) {
+            .carousel-item {
+                height: 400px;
+            }
+            
+            .carousel-caption {
+                padding: 15px;
+                bottom: 20px;
+            }
+            
+            .showcase-section .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+        /* new section */
+    /* Video Showcase Styles */
+.video-showcase {
+    background: linear-gradient(135deg, #f8f9fa 0%, #EFE9E3 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.video-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: var(--okust-orange);
+    opacity: 0.05;
+    border-radius: 50%;
+    transform: translate(150px, -150px);
+}
+
+.video-showcase .section-header h2 {
+    color: var(--okust-blue);
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.video-showcase .lead {
+    color: var(--okust-orange);
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}
+
+.video-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+}
+
+.video-thumbnail {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-thumbnail iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-content {
+    padding: 25px;
+}
+
+.video-content h3 {
+    color: var(--okust-blue);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.video-content p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive düzenlemeler */
+@media (max-width: 991px) {
+    .video-card {
+        margin-bottom: 30px;
+    }
+    
+    .video-showcase .section-header h2 {
+        font-size: 2rem;
+    }
+}
+/* Section header için yeni stiller */
+.section-header {
+    background-image: url('');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    padding: 80px 0;
+    margin-bottom: 50px;
+}
+
+.section-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Koyu overlay */
+    z-index: 1;
+}
+
+.section-header h2,
+.section-header p {
+    position: relative;
+    z-index: 2;
+    color: white;
+    margin-bottom: 70px;
+}
+
+.section-header h2 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #E25204 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.section-header .lead {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Responsive düzenlemeler */
+@media (max-width: 768px) {
+    .section-header {
+        padding: 60px 0;
+    }
+    
+    .section-header h2 {
+        font-size: 2.5rem;
+    }
+    
+    .section-header .lead {
+        font-size: 1.2rem;
+    }
+}
+  /* Sertifikalar Bölümü Stilleri */
+  .certificates-section {
+            background-color: #EFE9E3;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificates-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(150px, -150px);
+        }
+
+        .certificate-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .certificate-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+     
+
+        .section-header h2 {
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+        }
+
+        .section-header .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Responsive düzenlemeler */
+        @media (max-width: 768px) {
+            .certificate-card {
+                margin-bottom: 20px;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .section-header .lead {
+                font-size: 1.1rem;
+            }
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container position-relative">
+            <a class="navbar-brand" href="/index.html">
+                <img src="assets/yeniLogo.JPG" alt="Okust Logo" >
+            </a>
+
+            <div class="language-selector" style="display: none;">
+                <select id="languageSelect">
+                    <option value="tr">TR</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vehicles.html" data-menu="vehicles">Araçlar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/services.html" data-menu="markets">Yedek Parça & Servis</a>
+                    </li>
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about.html">Hakkımızda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-okust" href="/contact.html">İletişim</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Araçlar Mega Menü -->
+        <div class="mega-menu" id="vehicles-menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="vehicle-card">
+                            <img src="assets/eek.png" alt="MT Series">
+                            <h3>EEK</h3>
+                            <div class="vehicle-type">Endüstriyel Elektrikli Kamyonet</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="vehicle-card">
+                            <img src="assets/eeak.png" alt="MC Series">
+                            <h3>EEAK</h3>
+                            <div class="vehicle-type">Endüstriyel Elektrikli Açık Kamyonet</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="vehicle-card">
+                            <img src="assets/eec.png" alt="MP Series">
+                            <h3>EEÇ</h3>
+                            <div class="vehicle-type">Endüstriyel Elektrikli Çekici</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="vehicle-card">
+                            <img src="assets/ekpa.png" alt="MS Series">
+                            <h3>EKPA</h3>
+                            <div class="vehicle-type">Endüstriyel Kapalı Personel Aracı</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="vehicle-card">
+                            <img src="assets/eapa.png" alt="MX Series">
+                            <h3>EAPA</h3>
+                            <div class="vehicle-type">Endüstriyel Açık Personel Aracı</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="vehicle-card">
+                            <img src="assets/eha.png" alt="MX Series">
+                            <h3>EHA</h3>
+                            <div class="vehicle-type">Elektrikli Hizmet Aracı</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sektörler Mega Menü -->
+    
+    </nav>
+
+
+    <section class="video-showcase py-5">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="display-4 fw-bold">Elektrikli Araçların Geleceği</h2>
+                <p class="lead">Güvenilir, dayanıklı ve çevre dostu çözümler</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <iframe src="https://www.youtube.com/embed/l4aZjVd_K2o" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>                        </div>
+                        <div class="video-content">
+                            <h3>Endüstriyel Elektrikli Araçlar</h3>
+                            <p>Yüksek performans ve maksimum verimlilik için tasarlandı</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <iframe src="https://www.youtube.com/embed/lUk-XRl4ne8" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>                     
+                 </div>
+                        <div class="video-content">
+                            <h3>Üretim Tesislerimiz</h3>
+                            <p>Modern üretim hatlarımız ve kalite standartlarımız</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="certificates-section py-5">
+        <div class="container-fluid">
+            <div class="section-header text-center mb-5">
+                <h2 class="display-4 fw-bold text-white">Kalite Belgelerimiz</h2>
+                <p class="lead text-white">Güvenilirliğimizin ve Kalitemizin Uluslararası Kanıtları</p>
+            </div>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-4">
+                    <div class="certificate-card">
+                        <img src="assets/q1.jpg" alt="Kalite Belgesi 1" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="certificate-card">
+                        <img src="assets/q2.jpg" alt="Kalite Belgesi 2" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="certificate-card">
+                        <img src="assets/q3.jpg" alt="Kalite Belgesi 3" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Kurumsal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Hakkımızda</a></li>
+                        <li><a href="#" class="text-white-50">Kalite Politikamız</a></li>
+                        <li><a href="#" class="text-white-50">Kalite Belgelerimiz</a></li>
+            
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Ürünler</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Elektrikli Kamyonet</a></li>
+                       
+                        <li><a href="#" class="text-white-50">Personel Araçları</a></li>
+                        <li><a href="#" class="text-white-50">Hizmet Araçları</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Hizmetler</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Servis Hizmetleri</a></li>
+                        <li><a href="#" class="text-white-50">Yedek Parça</a></li>
+                       
+                        <li><a href="#" class="text-white-50">Teknik Destek</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>İletişim</h5>
+                    <p class="text-white-50">+90 212 567 11 94-96-97</p>
+                    <a href="#" class="btn btn-okust">Bilgi Al</a>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="text-white-50">© 2024 OKUST bir Altınboğa markasıdır. Tüm hakları saklıdır.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/your-code.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link[data-menu]');
+            const megaMenus = document.querySelectorAll('.mega-menu');
+            const isDesktop = window.innerWidth > 991;
+
+            if (isDesktop) {
+                let activeMenu = null;
+                let timeoutId = null;
+
+                const clearAllMenus = () => {
+                    megaMenus.forEach(menu => menu.classList.remove('show'));
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    activeMenu = null;
+                };
+
+                const showMenu = (menuId, link) => {
+                    clearTimeout(timeoutId); // Zamanlayıcıyı temizle
+                    clearAllMenus();
+                    
+                    const targetMenu = document.getElementById(menuId);
+                    if (targetMenu) {
+                        targetMenu.classList.add('show');
+                        link.classList.add('active');
+                        activeMenu = targetMenu;
+                    }
+                };
+
+                navLinks.forEach(link => {
+                    const menuContainer = document.createElement('div');
+                    menuContainer.className = 'menu-container';
+
+                    link.addEventListener('mouseenter', function () {
+                        const menuId = this.getAttribute('data-menu') + '-menu';
+                        showMenu(menuId, this);
+                    });
+                });
+
+                megaMenus.forEach(menu => {
+                    menu.addEventListener('mouseenter', function () {
+                        clearTimeout(timeoutId); // Fare menünün üzerine geldiğinde zamanlayıcıyı temizle
+                        const menuId = this.id;
+                        const link = document.querySelector(`[data-menu="${menuId.replace('-menu', '')}"]`);
+                        showMenu(menuId, link);
+                    });
+                });
+
+                // Navbar ve mega menü için ortak bir container oluştur
+                const navbar = document.querySelector('.navbar');
+                navbar.addEventListener('mouseleave', function (e) {
+                    // Fare navbar'dan çıktığında ve mega menüye girmediğinde
+                    timeoutId = setTimeout(() => {
+                        if (!e.relatedTarget?.closest('.mega-menu')) {
+                            clearAllMenus();
+                        }
+                    }, 100); // Küçük bir gecikme ekle
+                });
+
+                // Mega menüden çıkıldığında
+                megaMenus.forEach(menu => {
+                    menu.addEventListener('mouseleave', function (e) {
+                        // Fare başka bir mega menüye veya navbar'a gitmiyorsa
+                        if (!e.relatedTarget?.closest('.navbar') && !e.relatedTarget?.closest('.mega-menu')) {
+                            timeoutId = setTimeout(clearAllMenus, 100);
+                        }
+                    });
+                });
+
+                // Navbar dışına tıklandığında menüleri kapat
+                document.addEventListener('click', function (e) {
+                    if (!e.target.closest('.navbar') && !e.target.closest('.mega-menu')) {
+                        clearAllMenus();
+                    }
+                });
+            }
+
+            // Mobil menü için click event listener
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    if (!isDesktop && this.getAttribute('data-menu')) {
+                        e.preventDefault();
+                        const href = this.getAttribute('href');
+                        if (href && href !== '#') {
+                            window.location.href = href;
+                        }
+                    }
+                });
+            });
+
+            // Pencere boyutu değiştiğinde kontrol
+            window.addEventListener('resize', function () {
+                const isNowDesktop = window.innerWidth > 991;
+                if (isNowDesktop !== isDesktop) {
+                    location.reload();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
